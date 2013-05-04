@@ -28,8 +28,9 @@
       </li>
     </ul>
   </nav>
- 
-<?php $this->load->view($view); ?>
+<div class="row"> 
+  <?php $this->load->view($view); ?>
+</div>
 
   <!-- End Top Bar -->
   <footer class="row">
