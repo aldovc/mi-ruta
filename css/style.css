@@ -40,3 +40,7 @@
 	height: 500px;	
 	float: left;
 }
+
+#mapCanvas img {
+  max-width: none; height: auto;
+}
