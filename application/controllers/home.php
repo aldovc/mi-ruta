@@ -4,7 +4,7 @@ class Home extends CI_Controller {
 
 	public function index()
 	{
-    $vars['view']= 'map';
+    $vars['view']= 'home';
 		$this->load->view('template', $vars);
 	}
 }

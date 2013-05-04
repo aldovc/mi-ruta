@@ -1,11 +1,13 @@
 window.hack = {};
-
 (function() {
 	var h = hack;
-
+	// hack.app = {};
+	// app = hack.app;
 	h.map = null;
 	h.routes = [];
 	h.endpoints = null;
+	h.origin = null;
+	h.destiny = null;
 	h.init = function() {
 		var mapOpts = {
           center: new google.maps.LatLng(20.65965, -103.34963),
@@ -15,7 +17,7 @@ window.hack = {};
 		this.map = new google.maps.Map(document.getElementById("mapCanvas"), mapOpts);
 		this.endpoints = new markers( this.map, null, {autoinit: true} );
 
-		bindContollers();
+		this.bindControllers();
 	};
 
 	h.addRoute = function( data, coords ) {
@@ -44,31 +46,38 @@ window.hack = {};
 	};
 
 	h.setOrigin = function( coord ) {
-		cdir(this);
 		if( h.endpoints.get(0) !== -1 ) {
 			h.endpoints.set( 0, coord, null);
 		}
 		else {
-			clog('adding latlng');
 			h.endpoints.add( coord );
 		}
 	};
 
-	h.getUserLocation = function() {
+	h.setDestiny = function( coord ) {
+		if( h.endpoints.get(1) !== -1 ) {
+			h.endpoints.set( 1, coord, null);
+		}
+		else {
+			h.endpoints.add( coord );
+		}
+	};
+
+	h.getUserLocation = function( callback ) {
 		var me = this;
-		// Check for geolocation support
 		if (navigator.geolocation) {
-			// Use method getCurrentPosition to get coordinates
+			clog('getting location, please wait...');
 			navigator.geolocation.getCurrentPosition(function (position) {
-				// Access them accordingly
-				var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-				cdir(latlng);
-				me.setOrigin( latlng );
-				alert(position.coords.latitude + ", " + position.coords.longitude);
-				var lol = new google.maps.Marker( {position: latlng, map: me.map} );
+				var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+				if( typeof callback === 'function') {
+					callback( latLng );
+				}
 			});
 		}
-	}
+		else {
+			return -1;
+		}
+	};
 
 	/** Bind view-controllers */
 	function bindContollers() {
@@ -126,7 +135,6 @@ window.hack = {};
 		};	
 
 		this.add = function( coord, listener ) {
-			cdir(this.map);
 			this.markers.push( new google.maps.Marker( {position: coord, map: this.map} ) );
 		};
 
@@ -212,30 +220,59 @@ window.hack = {};
 			this.init();
 		}
 	}
+
+
+	h.bindControllers = function() {
+		var me = this;
+		$('#getLocationBtn').click( function() {
+			me.getUserLocation( function( latLng ) {
+				me.setOrigin( latLng );
+				me.map.panTo( latLng );
+			});
+		});
+
+		$('#searchAddrBtn').click( function() {
+			var origin = $('#originInput').val(),
+				destiny = $('#destinyInput').val(),
+				regex = new RegExp('guadalajara', 'i');
+
+			if( regex.test( origin ) === false ) {
+				origin += ' Guadalajara';
+			}
+			if( regex.test( destiny ) === false ) {
+				destiny += ' Guadalajara';
+			}
+
+			me.searchAddress( origin, function( result ) {
+				me.setOrigin( result );
+			});
+
+			me.searchAddress( destiny, function( result ) {
+				me.set( result );
+			});
+		});
+
+		$('#searchAddrBtn').click( function() {
+			var origin = $('#originInput').val(),
+				destiny = $('#destinyInput').val(),
+				regex = new RegExp('guadalajara', 'i');
+
+			if( regex.test( origin ) === false ) {
+				origin += ' Guadalajara';
+			}
+			if( regex.test( destiny ) === false ) {
+				destiny += ' Guadalajara';
+			}
+
+			h.searchAddress( origin, function( result ) {
+				origin = result[0].geometry.location;
+				h.searchAddress( destiny, function( result ) {
+					destiny = result[0].geometry.location;
+					h.setEndpoints( origin, destiny );
+				});
+			});
+		});		
+	};
 })();
 
 hack.init();
-
-function testApp() {
-	var fakeRotues = [],
-		route2 = [];
-	for(var i=0; i<10; i++) {
-		fakeRotues.push( new google.maps.LatLng(20.6998+(i/1000), -103.3489+(i/1000)) );
-	}
-	for(var i=0; i<30; i++) {
-		if(i<10) {
-			route2.push( new google.maps.LatLng(20.6498+(i/1000), -103.34589+(i/1000)) );	
-		}else
-		{
-			route2.push( new google.maps.LatLng(20.6498+(i/1000), -103.34589+(i/1000)) );	
-		}
-		
-		
-	}
-	hack.addRoute( {id:'646', name:'Ruta 646'}, fakeRotues );
-	hack.addRoute( {id:'646', name:'Ruta 646'}, route2 );
-	hack.routes[0].showPath();
-	hack.routes[1].showPath();
-
-	hack.getUserLocation();
-}
