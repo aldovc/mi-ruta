@@ -11,6 +11,7 @@
   <title>Mi Ruta GDL</title>
 
   <link rel="stylesheet" href="css/vendor/foundation/foundation.min.css">
+  <link href='http://fonts.googleapis.com/css?family=Noto+Sans:400,700' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -20,7 +21,7 @@
       <!-- Title Area -->
       <li class="name">
         <h1>
-          <a href="#">
+          <a href="#" class="logo">
            Mi Ruta GDL 
           </a>
         </h1>
