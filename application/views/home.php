@@ -18,6 +18,12 @@
 </head>
 
 <body>
+	<?php
+		$this->load->view('map');
+	?>
+
+  <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+  <script src="js/app.js"></script>
 </body>
 </html>
