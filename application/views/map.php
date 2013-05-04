@@ -1,2 +1,2 @@
-<div id="mapCanvas">
+<div id="mapCanvas" class="map">
 </div>

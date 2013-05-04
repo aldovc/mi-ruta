@@ -4,3 +4,5 @@
 	width: 600px;
 	height: 500px;	
 }
+
+.map img { max-width: none; height: auto }
