@@ -86,7 +86,7 @@
 	width: 100px;
 }
 	.sendButton {
-		margin-top: 50px;
+		/*margin-top: 50px;*/
 	}
 
 #progressBar {
@@ -106,4 +106,10 @@
 
 #thanks {
   text-align: center;
+}
+
+
+.ansChart {
+	height: 350px;
+	/*display: 'none';*/
 }

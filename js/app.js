@@ -11,6 +11,12 @@ window.hack = {};
           mapTypeId: google.maps.MapTypeId.ROADMAP
         };
 		this.map = new google.maps.Map(document.getElementById("mapCanvas"), mapOpts);
+		// var georssLayer = new google.maps.KmlLayer('http://gmaps-samples.googlecode.com/svn/trunk/ggeoxml/cta.kml');
+		var georssLayer = new google.maps.KmlLayer({
+		    url: 'http://localhost/projects/mi-ruta/images/rutas.kml'
+		    // url: 'http://gmaps-samples.googlecode.com/svn/trunk/ggeoxml/cta.kml'
+		  });
+		georssLayer.setMap(this.map);
 		this.endpoints = new markers( this.map, null, {autoinit: true} );
 
 		this.bindControllers();
@@ -280,6 +286,9 @@ window.hack = {};
 					me.searchAddress( destiny, function( result ) {
 						me.setDestiny( result );
 						me.map.panTo( result );
+
+						var georssLayer = new google.maps.KmlLayer('rutas.kml');
+						georssLayer.setMap(me.map);
 					});
 				});
 			}
@@ -345,33 +354,12 @@ window.hack = {};
 		    	google.maps.event.trigger(me.map, "resize");
 		    	me.map.panTo( newCenter );
 		    }
+		    $('#progressBar').css('top', $(window).height()/4 );
+			$('#progressBar > span').css('top', $(window).height()/4 );
 		});
 
 		$(window).scroll(function() {
-			var pOff = $('#progressBar').offset().top;
-
-			if( pOff > positions.surveyStart ) {
-				$('#progressBar').css('display', 'inline');
-
-				if( pOff > positions.q5 ) {
-					$('#progressBar').html('<span>6/6</span>');
-				} else if( pOff > positions.q4 ) {
-					$('#progressBar').html('<span>5/6</span>');
-				} else if( pOff > positions.q3 ) {
-					$('#progressBar').html('<span>4/6</span>');
-				} else if( pOff > positions.q2 ) {
-					$('#progressBar').html('<span>3/6</span>');
-				} else if( pOff > positions.q1 ) {
-					$('#progressBar').html('<span>2/6</span>');
-				}
-				else {
-					$('#progressBar').html('<span>1/6</span>');	
-				}
-				$('#progressBar > span').css('top', $(window).height()/4 + 20);
-			}
-			else {
-				$('#progressBar').css('display', 'none');
-			}
+			progressFunction( positions );
 		});
 
 		$('.routeDetailItem').click( function() {
@@ -381,7 +369,7 @@ window.hack = {};
 
 		window.setTimeout( function() {
 			$('.question').css('height',  $(window).height() );	
-			$('.question').css('padding-top',  $(window).height()/4 );	
+			$('.question').css('padding-top', 0 );	
 			$('#progressBar').css('top', $(window).height()/4 );
 			$('#progressBar > span').css('top', $(window).height()/4 );
 			positions = {
@@ -407,6 +395,7 @@ window.hack = {};
 					if( opt !== undefined ) {
 						opt = opt.split('_')[1];
 						answers.push(opt.charAt(0)+'_'+opt.charAt(1));
+
 					}
 					else {
 						alert('Debe completar el cuestionario.');
@@ -421,7 +410,17 @@ window.hack = {};
 			          beforeSend: function(){
 			            $("#thanks").foundation('reveal','open');
 			            setTimeout(function() {
-				              window.location.href = location.href;
+			            	$("#thanks").foundation('reveal','close');
+				              showCharts();
+				              panToSection(1);
+				              $('#submitButton').css('display','none');
+				              $('.ans').unbind('click');
+				              $('.ans').on('click',function() {
+				              	var section = $(this).attr('id').split('_')[1].charAt(0);
+						    	if( section < 5 ) {
+						    		panToSection( parseInt(section) + 1);
+						    	}
+				              });
 				          }, 3000);
 			          },
 								data: { survey: answers}
@@ -441,6 +440,33 @@ window.hack = {};
 	/**
 	* Auxiliary functions
 	*/
+	function progressFunction( positions ) {
+		var pOff = $('#progressBar').offset().top;
+
+		if( pOff > positions.surveyStart ) {
+			$('#progressBar').css('display', 'inline');
+
+			if( pOff > positions.q5 ) {
+				$('#progressBar').html('<span>6/6</span>');
+			} else if( pOff > positions.q4 ) {
+				$('#progressBar').html('<span>5/6</span>');
+			} else if( pOff > positions.q3 ) {
+				$('#progressBar').html('<span>4/6</span>');
+			} else if( pOff > positions.q2 ) {
+				$('#progressBar').html('<span>3/6</span>');
+			} else if( pOff > positions.q1 ) {
+				$('#progressBar').html('<span>2/6</span>');
+			}
+			else {
+				$('#progressBar').html('<span>1/6</span>');	
+			}
+			$('#progressBar > span').css('top', $(window).height()/4 + 20);
+		}
+		else {
+			$('#progressBar').css('display', 'none');
+		}
+	}
+
 	function setSelectedOpt( id ) {
     	var section = id.charAt(0);
     	for(var i=1; i<4; i++) {
@@ -456,7 +482,157 @@ window.hack = {};
     	$('html, body').animate({
             scrollTop: $("#question"+ section).offset().top
         }, 500);
-        $("#question"+ section).css('height',  $(window).height() );    }
+        $("#question"+ section).css('height',  $(window).height() );    
+    }
+
+    function showCharts() {
+    	$('#chart1').highcharts({
+	        chart: {
+	            type: 'bar'
+	        },
+	        title: {
+	            text: 'Resultados'
+	        },
+	        xAxis: {
+	            categories: ['Satisfaccion con la espera']
+	        },
+	        yAxis: {
+	            title: {
+	                text: 'Usuarios'
+	            }
+	        },
+	        series: [
+	        {
+			    type: 'bar',
+			    name: 'Si',
+			    data: [3]
+			}, {
+			    type: 'bar',
+			    name: 'No',
+			    data: [2]
+			}]
+	    });
+	    $('#chart2').highcharts({
+	        chart: {
+	            type: 'bar'
+	        },
+	        title: {
+	            text: 'Resultados'
+	        },
+	        xAxis: {
+	            categories: ['Estado de la unidad']
+	        },
+	        yAxis: {
+	            title: {
+	                text: 'Usuarios'
+	            }
+	        },
+	        series: [
+	        {
+			    type: 'bar',
+			    name: 'Bueno',
+			    data: [3]
+			}, {
+			    type: 'bar',
+			    name: 'Regular',
+			    data: [2]
+			}, {
+			    type: 'bar',
+			    name: 'Malo',
+			    data: [2]
+			}]
+	    });
+	    $('#chart3').highcharts({
+	        chart: {
+	            type: 'bar'
+	        },
+	        title: {
+	            text: 'Resultados'
+	        },
+	        xAxis: {
+	            categories: ['Servicio brindado']
+	        },
+	        yAxis: {
+	            title: {
+	                text: 'Usuarios'
+	            }
+	        },
+	        series: [
+	        {
+			    type: 'bar',
+			    name: 'Bueno',
+			    data: [3]
+			}, {
+			    type: 'bar',
+			    name: 'Regular',
+			    data: [2]
+			}, {
+			    type: 'bar',
+			    name: 'Malo',
+			    data: [2]
+			}]
+	    });
+	    $('#chart4').highcharts({
+	        chart: {
+	            type: 'bar'
+	        },
+	        title: {
+	            text: 'Resultados'
+	        },
+	        xAxis: {
+	            categories: ['Forma de conducir']
+	        },
+	        yAxis: {
+	            title: {
+	                text: 'Usuarios'
+	            }
+	        },
+	        series: [
+	        {
+			    type: 'bar',
+			    name: 'Buena',
+			    data: [3]
+			}, {
+			    type: 'bar',
+			    name: 'Regular',
+			    data: [2]
+			}, {
+			    type: 'bar',
+			    name: 'Mala',
+			    data: [2]
+			}]
+	    });
+	    $('#chart5').highcharts({
+	        chart: {
+	            type: 'bar'
+	        },
+	        title: {
+	            text: 'Resultados'
+	        },
+	        xAxis: {
+	            categories: ['Se detuvo en paradas oficiales']
+	        },
+	        yAxis: {
+	            title: {
+	                text: 'Usuarios'
+	            }
+	        },
+	        series: [
+	        {
+			    type: 'bar',
+			    name: 'En todas',
+			    data: [3]
+			}, {
+			    type: 'bar',
+			    name: 'En la mayoria',
+			    data: [2]
+			}, {
+			    type: 'bar',
+			    name: 'Solo en algunas',
+			    data: [2]
+			}]
+	    });
+    }
 })();
 
 hack.init();

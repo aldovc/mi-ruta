@@ -31,6 +31,9 @@
 					</div>
 				</div>
 			</div>
+			<div class="large-12 columns ansChart" id="chart1"> 
+
+			</div>
 		</div>
 		
 		<div class="row question" id="question2">
@@ -52,6 +55,9 @@
 						Malo
 					</div>
 				</div>
+			</div>
+			<div class="large-12 columns ansChart" id="chart2"> 
+
 			</div>
 		</div>
 		
@@ -75,6 +81,9 @@
 						</div>
 				</div>
 			</div>
+			<div class="large-12 columns ansChart" id="chart3"> 
+
+			</div>
 		</div>
 		
 		<div class="row question" id="question4">
@@ -97,6 +106,9 @@
 					</div>
 				</div>
 			</div>
+			<div class="large-12 columns ansChart" id="chart4"> 
+
+			</div>
 		</div>
 		
 		<div class="row question" id="question5">
@@ -118,6 +130,9 @@
 						Solo en algunas
 					</div>
 				</div>
+			</div>
+			<div class="large-12 columns ansChart" id="chart5"> 
+
 			</div>
 			<div class="large=2 columns sendButton" id="submitButton">
 				<button type="button">Enviar</button>
