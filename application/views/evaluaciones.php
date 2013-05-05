@@ -1,7 +1,6 @@
 <div id="evaluaciones">	
 	<div id="cuestionario">
 		<div id="progressBar">
-			Progress
 		</div>
 		<div class="row question"  id="question0">
 			<div class="large-10 columns">
