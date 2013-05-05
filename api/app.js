@@ -1,6 +1,6 @@
 var server = require('restify').createServer();
 var pg = require("pg");
-var conString = "pg://apidispatcher@localhost:5432/sample";
+var conString = "pg://apidispatcher:h4ck4th0n@localhost:5432/sample";
 var client = new pg.Client(conString);
 client.connect();
 
