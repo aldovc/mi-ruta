@@ -42,6 +42,8 @@
       </footer>
   <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+  <script src-"js/vendor/foundation/foundation.min.js"></script>
+  <script src-"js/vendor/foundation/foundation/foundation.forms.js"></script>
   <script src="js/app.js"></script>
   <script src="js/test.js"></script>
 </body>

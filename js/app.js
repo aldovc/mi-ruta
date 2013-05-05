@@ -301,7 +301,50 @@ window.hack = {};
 				}, 2000);
 			}
 		});
+
+		/** Pan to sections */
+		$('.ans').click( function() {
+	    	setSelectedOpt( $(this).attr('id').split('_')[1] );
+	    });
+
+	    $('.backBtn').click(function() {
+	    	var section = $(this).attr('id').split('backTo')[1];
+	    	panToSection( parseInt(section) );
+		});
+
+		$('.ansTextfield').change(function(){
+			panToSection(1);
+		});
+
+		$(window).resize(function () 
+		{ 
+			var newCenter = me.map.getCenter();
+		    if(me.map !== null ) { 
+		    	google.maps.event.trigger(me.map, "resize");
+		    	me.map.panTo( newCenter );
+		    }
+		});
 	};
+
+	/**
+	* Auxiliary functions
+	*/
+	function setSelectedOpt( id ) {
+    	var section = id.charAt(0);
+    	for(var i=1; i<4; i++) {
+    		$('#ans_'+ section + i ).removeClass('ansSelected');
+    	}
+    	$('#ans_' + id).addClass('ansSelected');
+    	if( section < 5 ) {
+    		panToSection( parseInt(section) + 1);
+    	}
+    }
+
+    function panToSection( section ) {
+    	$('html, body').animate({
+            scrollTop: $("#question"+ section).offset().top
+        }, 500);
+    }
 })();
 
 hack.init();

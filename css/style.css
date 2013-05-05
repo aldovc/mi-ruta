@@ -19,3 +19,26 @@
 #mapCanvas img {
   max-width: none; height: auto;
 }
+
+
+/** QUESTIONARY **/
+.ans {
+	padding-left: 45px;
+	font-size: 35px;
+	margin-bottom: 10px;
+}
+
+.ansTextcontainer {
+	font-size: 35px;
+}
+
+.ansSelected {
+	background-image: url('../images/checked.png');
+	background-repeat:no-repeat;
+}
+
+.ansTextfield {
+	padding-left: 0px;
+	font-size: 35px;
+	width: 100px;
+}
