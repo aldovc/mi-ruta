@@ -97,6 +97,12 @@
 	top: 0px;
 	right: 0px;
 }
+	#progressBar > span {
+		font-size: 1.5em;
+		font-weight: bold;
+		right: 10px;
+		position: fixed;
+	}
 
 #thanks {
   text-align: center;

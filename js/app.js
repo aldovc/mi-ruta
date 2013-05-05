@@ -397,13 +397,15 @@ window.hack = {};
 		
 		$('#submitButton').click( function() {
 			var answers = [],
-				minutes = $('.ansTextfield').val();
+				minutes = $('.ansTextfield').val(),
+				completeFlag = false;
 			if( minutes !== '' && !isNaN(minutes) ) {
 				answers.push('0_'+minutes);
 
 				for( var i = 1; i < 6; i++ ) {
-					var opt = $('#ansOpts'+i+' > .ansSelected').attr('id').split('_')[1];
+					var opt = $('#ansOpts'+i+' > .ansSelected').attr('id');
 					if( opt !== undefined ) {
+						opt = opt.split('_')[1];
 						answers.push(opt.charAt(0)+'_'+opt.charAt(1));
 					}
 					else {
@@ -413,16 +415,18 @@ window.hack = {};
 					}
 				}
 
-				$.ajax({
-					type: 'POST',
-					url: './post_survey',
-          beforeSend: function(){
-            $("#thanks").foundation('reveal','open');
-          },
-					data: { survey: answers}
-				}).done( function( resp ) {
-					clog(resp);
-				});
+				if( i === 6) {
+					$.ajax({
+						type: 'POST',
+						url: './post_survey',
+			            beforeSend: function(){
+			            	$("#thanks").foundation('reveal','open');
+			          	},
+						data: { survey: answers}
+						}).done( function( resp ) {
+							clog(resp);
+					});
+				}
 			}
 			else {
 				alert('Debe completar el cuestionario.');
