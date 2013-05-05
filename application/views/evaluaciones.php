@@ -11,16 +11,16 @@
 	<div id="cuestionario">
 		<div id="progressBar">
 		</div>
-		<!-- <div class="row question"  id="question9">
+		<div class="row question"  id="question9">
 			<div class="large-10 columns">
-				<h2>&iquest;Cu&aacute;al ruta tomaste?  </h2> 
+				<h2>&iquest;Cu&aacute;l ruta tomaste?  </h2> 
 			</div>
 			<div class="large-12 columns">
 				<div class="ansTextcontainer">
-					<input class="routeTextfield"></input>
+					Ruta: <input class="routeTextfield"></input>
 				</div>
 			</div>
-		</div> -->
+		</div>
 
 		<div class="row question"  id="question0">
 			<div class="large-10 columns">

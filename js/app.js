@@ -310,6 +310,7 @@ cdir = function(args){console.dir(args);};
 	        var georssLayer = new google.maps.KmlLayer('https://dl.dropbox.com/s/bjs386dqnvc1qt7/rutas%20de%20transporte.kmz');
 			georssLayer.setMap(me.map);
 			$('.routeDetail').css('display', 'inline');
+			$('.routeDetail').css('margin-left', 15);
 		});
 
 		$('#originMapBtn').click( function() {
@@ -359,6 +360,18 @@ cdir = function(args){console.dir(args);};
 			}
 		});		
 
+		$('.routeTextfield').on('change', function(){
+			var val = $(this).val();
+			panToSection(0);
+			// if( !isNaN( val ) ) {
+				
+			// }
+			// else {
+			// 	alert('Solo numeros por favor.');
+			// 	panToSection(0);
+			// }
+		});
+
 		$(window).resize(function () 
 		{ 
 			var newCenter = me.map.getCenter();
@@ -385,7 +398,7 @@ cdir = function(args){console.dir(args);};
 			$('#progressBar').css('top', $(window).height()/4 );
 			$('#progressBar > span').css('top', $(window).height()/4 );
 			positions = {
-				surveyStart: $('#cuestionario').position().top,
+				surveyStart: $('#question0').position().top,
 				q0: $('#question0').position().top,
 				q1: $('#question1').position().top,
 				q2: $('#question2').position().top,
@@ -457,7 +470,7 @@ cdir = function(args){console.dir(args);};
 	        $('#progressBar').css('top', $(window).height()/4 );
 			$('#progressBar > span').css('top', $(window).height()/4 );
 			me.positions = {
-				surveyStart: $('#cuestionario').position().top,
+				surveyStart: $('#question0').position().top,
 				q0: $('#question0').position().top,
 				q1: $('#question1').position().top,
 				q2: $('#question2').position().top,
@@ -536,7 +549,7 @@ cdir = function(args){console.dir(args);};
 	        {
 			    type: 'bar',
 			    name: 'Si',
-			    data: [3]
+			    data: [7]
 			}, {
 			    type: 'bar',
 			    name: 'No',
@@ -566,7 +579,7 @@ cdir = function(args){console.dir(args);};
 			}, {
 			    type: 'bar',
 			    name: 'Regular',
-			    data: [2]
+			    data: [11]
 			}, {
 			    type: 'bar',
 			    name: 'Malo',
@@ -596,11 +609,11 @@ cdir = function(args){console.dir(args);};
 			}, {
 			    type: 'bar',
 			    name: 'Regular',
-			    data: [2]
+			    data: [8]
 			}, {
 			    type: 'bar',
 			    name: 'Malo',
-			    data: [2]
+			    data: [11]
 			}]
 	    });
 	    $('#chart4').highcharts({
@@ -626,7 +639,7 @@ cdir = function(args){console.dir(args);};
 			}, {
 			    type: 'bar',
 			    name: 'Regular',
-			    data: [2]
+			    data: [14]
 			}, {
 			    type: 'bar',
 			    name: 'Mala',

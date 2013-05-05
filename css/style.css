@@ -95,6 +95,11 @@
 	background-repeat:no-repeat;
 }
 
+.routeTextfield {
+	padding-left: 0px;
+	font-size: 35px;
+	width: 100px;
+}
 .ansTextfield {
 	padding-left: 0px;
 	font-size: 35px;
