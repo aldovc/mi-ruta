@@ -10,12 +10,16 @@ class MRoutes extends CI_Model {
   {
     $result[] = array(
       'number' => 0,
-      'icon' => "images/start.png",
-      'detail' => "A detail");
+      'icon' => "routeIcon startIcon",
+      'detail' => "Incio de ruta");
     $result[] = array(
       'number' => 1,
-      'icon' => "images/start.png",
-      'detail' => "A second detail");
+      'icon' => "routeIcon middleIcon",
+      'detail' => "Transbordo en: ");
+    $result[] = array(
+      'number' => 2,
+      'icon' => "routeIcon endIcon",
+      'detail' => "Fin de ruta");
 
     return $result;
   }

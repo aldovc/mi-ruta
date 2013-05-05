@@ -1,8 +1,6 @@
 window.hack = {};
 (function() {
 	var h = hack;
-	// hack.app = {};
-	// app = hack.app;
 	h.map = null;
 	h.routes = [];
 	h.endpoints = null;
