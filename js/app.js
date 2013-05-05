@@ -15,8 +15,6 @@ cdir = function(args){console.dir(args);};
         };
 		this.map = new google.maps.Map(document.getElementById("mapCanvas"), mapOpts);
 		
-		var georssLayer = new google.maps.KmlLayer('https://dl.dropbox.com/s/bjs386dqnvc1qt7/rutas%20de%20transporte.kmz');
-		georssLayer.setMap(this.map);
 		this.endpoints = new markers( this.map, null, {autoinit: true} );
 
 		this.bindControllers();
@@ -308,6 +306,9 @@ cdir = function(args){console.dir(args);};
 			$('html, body').animate({
 	            scrollTop: $("#mapCanvas").offset().top
 	        }, 200);
+
+	        var georssLayer = new google.maps.KmlLayer('https://dl.dropbox.com/s/bjs386dqnvc1qt7/rutas%20de%20transporte.kmz');
+			georssLayer.setMap(me.map);
 		});
 
 		$('#originMapBtn').click( function() {
