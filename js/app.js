@@ -55,7 +55,7 @@ window.hack = {};
 			h.endpoints.set( 0, coord, null);
 		}
 		else {
-			h.endpoints.add( coord );
+			h.endpoints.add( coord, {icon: 'images/start.png'} );
 		}
 	};
 
@@ -72,7 +72,7 @@ window.hack = {};
 		}
 		else {
 			if( this.getOrigin() !== -1 ) {
-				h.endpoints.add( coord );
+				h.endpoints.add( coord, {icon: 'images/end.png'} );
 			}
 			else {
 				alert('Elige el origen primero');
@@ -127,8 +127,11 @@ window.hack = {};
 			}
 		};	
 
-		this.add = function( coord, listener ) {
+		this.add = function( coord, opts, listener ) {
 			this.markers.push( new google.maps.Marker( {position: coord, map: this.map, draggable: true} ) );
+			if( opts && opts.icon ) {
+				this.markers[ this.markers.length -1 ].setIcon( opts.icon );
+			}
 		};
 
 		this.set = function( index, coord, opts) {
