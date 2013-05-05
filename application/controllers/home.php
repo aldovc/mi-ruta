@@ -11,7 +11,6 @@ class Home extends CI_Controller {
     $config = $CI->config->item('facebook');
     $this->load->library('facebook', $config);
     $this->load->library('session');
-    $this->load->model('muser');
   }
 
 
