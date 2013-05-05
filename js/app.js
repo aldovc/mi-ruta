@@ -309,6 +309,7 @@ cdir = function(args){console.dir(args);};
 
 	        var georssLayer = new google.maps.KmlLayer('https://dl.dropbox.com/s/bjs386dqnvc1qt7/rutas%20de%20transporte.kmz');
 			georssLayer.setMap(me.map);
+			$('.routeDetail').css('display', 'inline');
 		});
 
 		$('#originMapBtn').click( function() {
@@ -392,6 +393,7 @@ cdir = function(args){console.dir(args);};
 				q4: $('#question4').position().top,
 				q5: $('#question5').position().top
 			};
+			$('.routeDetail').css('display', 'none');
 		}, 100);
 		
 		$('#submitButton').click( function() {
