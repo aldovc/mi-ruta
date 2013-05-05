@@ -5,4 +5,5 @@
     $this->load->view('routeDetail');
     $this->load->view('routeFooter');
     $this->load->view('evaluaciones');
+    $this->load->view('thanks');
 	?>
