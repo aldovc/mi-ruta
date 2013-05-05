@@ -317,9 +317,16 @@ window.hack = {};
 	    	panToSection( parseInt(section) );
 		});
 
-		$('.ansTextfield').change(function(){
-			panToSection(1);
-		});
+		$('.ansTextfield').on('change', function(){
+			var val = $(this).val();
+			if( !isNaN( val ) ) {
+				panToSection(1);
+			}
+			else {
+				alert('Solo numeros por favor.');
+				panToSection(0);
+			}
+		});		
 
 		$(window).resize(function () 
 		{ 
@@ -333,6 +340,43 @@ window.hack = {};
 		$('.routeDetailItem').click( function() {
 			var id = parseInt( $(this).attr('id').split('_')[1] );
 			me.panToEndpoint( id );
+		});
+
+		window.setTimeout( function() {
+			$('.question').css('height',  $(window).height() );	
+			$('.question').css('padding-top',  $(window).height()/4 );	
+		}, 100);
+		
+		$('#submitButton').click( function() {
+			var answers = [],
+				minutes = $('.ansTextfield').val();
+			if( minutes !== '' && !isNaN(minutes) ) {
+				answers.push(minutes);
+
+				for( var i = 1; i < 6; i++ ) {
+					var opt = $('#ansOpts'+i+' > .ansSelected').attr('id');
+					if( opt !== undefined ) {
+						answers.push(opt);
+					}
+					else {
+						alert('Debe completar el cuestionario.');
+						panToSection(i);
+						break;
+					}
+				}
+
+				$.ajax({
+					type: 'POST',
+					url: './post_survey',
+					params: { survey: answers}
+				}).done( function( resp ) {
+					clog(resp);
+				});
+			}
+			else {
+				alert('Debe completar el cuestionario.');
+					panToSection(0);
+			}
 		});
 	};
 
@@ -354,6 +398,7 @@ window.hack = {};
     	$('html, body').animate({
             scrollTop: $("#question"+ section).offset().top
         }, 500);
+        $("#question"+ section).css('height',  $(window).height() );
     }
 })();
 

@@ -61,6 +61,10 @@
 }
 
 /** QUESTIONARY **/
+.question {
+	vertical-align: 'middle';
+}
+
 .ans {
 	padding-left: 45px;
 	font-size: 35px;
@@ -81,3 +85,6 @@
 	font-size: 35px;
 	width: 100px;
 }
+	.sendButton {
+		margin-top: 50px;
+	}

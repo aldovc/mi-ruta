@@ -1,6 +1,6 @@
 <div id="evaluaciones">	
 	<div id="cuestionario">
-		<div class="row"  id="question0">
+		<div class="row question"  id="question0">
 			<div class="large-10 columns">
 				<h2>&iquest;Cuanto esperaste por el camion?  </h2> 
 			</div>
@@ -11,7 +11,7 @@
 			</div>
 		</div>
 
-		<div class="row"  id="question1">
+		<div class="row question"  id="question1">
 			<div class="large-10 columns">
 				<h2>&iquest;Estas satisfecho con el tiempo de espera? </h2> 
 			</div>
@@ -19,8 +19,8 @@
 				<button type="button" id="backTo0" class="secondary button backBtn">Back</button>
 			</div>
 			<div class="large-12 columns">
-				<div class="preguntaUno">
-					<div class="ans ansSelected" id="ans_11">
+				<div id="ansOpts1">
+					<div class="ans" id="ans_11">
 						Si
 					</div>
 				
@@ -31,7 +31,7 @@
 			</div>
 		</div>
 		
-		<div class="row" id="question2">
+		<div class="row question" id="question2">
 			<div class="large-10 columns">
 				<h2>&iquest;En que estado se encuentra la unidad de transporte p&uacuteblico? </h2>
 			</div>
@@ -39,8 +39,8 @@
 				<button type="button" id="backTo1" class="secondary button backBtn">Back</button>
 			</div>
 			<div class="large-12 columns">
-				<div class="preguntaDos">
-					<div class="ans ansSelected" id="ans_21">
+				<div id="ansOpts2">
+					<div class="ans" id="ans_21">
 						Bueno
 					</div>
 					<div class="ans" id="ans_22">
@@ -53,16 +53,16 @@
 			</div>
 		</div>
 		
-		<div class="row">
+		<div class="row question"  id="question3">
 			<div class="large-10 columns">
-				<h2 id="question3">&iquest;C&oacutemo te parecio el servicio de transporte que se te brind&oacute? </h2> 
+				<h2>&iquest;C&oacutemo te parecio el servicio de transporte que se te brind&oacute? </h2> 
 			</div>
 			<div class="large-2 columns">
 				<button type="button" id="backTo2" class="secondary button backBtn">Back</button>
 			</div>
 			<div class="large-12 columns">
-				<div class="preguntaTres">
-						<div class="ans ansSelected" id="ans_31">
+				<div id="ansOpts3">
+						<div class="ans" id="ans_31">
 							Bueno
 						</div>
 						<div class="ans" id="ans_32">
@@ -75,16 +75,16 @@
 			</div>
 		</div>
 		
-		<div class="row">
+		<div class="row question" id="question4">
 			<div class="large-10 columns">
-				<h2 id="question4">&iquest;C&oacutemo calificarias la forma de conducir del operador? </h2> 
+				<h2>&iquest;C&oacutemo calificarias la forma de conducir del operador? </h2> 
 			</div>
 			<div class="large-2 columns">
 				<button type="button" id="backTo3" class="secondary button backBtn">Back</button>
 			</div>
 			<div class="large-12 columns">
-				<div class="preguntaCuatro">		
-					<div class="ans ansSelected" id="ans_41">
+				<div id="ansOpts4">		
+					<div class="ans " id="ans_41">
 						Buena
 					</div>
 					<div class="ans" id="ans_42">
@@ -97,16 +97,16 @@
 			</div>
 		</div>
 		
-		<div class="row">
+		<div class="row question" id="question5">
 			<div class="large-10 columns">
-				<h2 id="question5">&iquest;El cami&oacuten se detuvo en las paradas oficiales? </h2> 
+				<h2>&iquest;El cami&oacuten se detuvo en las paradas oficiales? </h2> 
 			</div>
 			<div class="large-2 columns">
 				<button type="button" id="backTo4" class="secondary button backBtn">Back</button>
 			</div>
 			<div class="large-12 columns">
-				<div class="preguntaCinco">
-					<div class="ans ansSelected"  id="ans_51">
+				<div id="ansOpts5">
+					<div class="ans "  id="ans_51">
 						En todas
 					</div>
 					<div class="ans" id="ans_52">
@@ -117,10 +117,9 @@
 					</div>
 				</div>
 			</div>
-		</div>
-
-		<div class="row">
-			<button type="button" onclick="alert('Hello world!')">Submit</button>
+			<div class="large=2 columns sendButton" id="submitButton">
+				<button type="button">Enviar</button>
+			</div>
 		</div>
 	</div>
 </div>
