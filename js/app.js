@@ -96,6 +96,25 @@ window.hack = {};
 		}
 	};
 
+	h.getRoutes = function() {
+		var me = this,
+			origin = me.getOrigin(),
+			destiny = me.getDestiny();
+
+		$.ajax({
+			type: 'GET',
+			url: '',
+			data: { 
+				origin: origin.lat() + '' + origin.lng(),
+				destiny: destiny.lat() + '' + destiny.lng()
+			}
+		}).done( function( resp ) {
+			if( resp !== 'error') {
+				var response = JSON.parse( resp );
+			}
+		});
+	};
+
 	/** MODELS **/
 
 	/**
