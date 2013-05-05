@@ -27,7 +27,7 @@
 				<h2>&iquest;Estas satisfecho con el tiempo de espera? </h2> 
 			</div>
 			<div class="large-2 columns">
-				<button type="button" id="backTo0" class="secondary button backBtn">Back</button>
+				<button type="button" id="backTo0" class="secondary button backBtn">Anterior</button>
 			</div>
 			<div class="large-12 columns">
 				<div id="ansOpts1">
@@ -50,7 +50,7 @@
 				<h2>&iquest;En que estado se encuentra la unidad de transporte p&uacuteblico? </h2>
 			</div>
 			<div class="large-2 columns">
-				<button type="button" id="backTo1" class="secondary button backBtn">Back</button>
+				<button type="button" id="backTo1" class="secondary button backBtn">Anterior</button>
 			</div>
 			<div class="large-12 columns">
 				<div id="ansOpts2">
@@ -75,7 +75,7 @@
 				<h2>&iquest;C&oacutemo te parecio el servicio de transporte que se te brind&oacute? </h2> 
 			</div>
 			<div class="large-2 columns">
-				<button type="button" id="backTo2" class="secondary button backBtn">Back</button>
+				<button type="button" id="backTo2" class="secondary button backBtn">Anterior</button>
 			</div>
 			<div class="large-12 columns">
 				<div id="ansOpts3">
@@ -100,7 +100,7 @@
 				<h2>&iquest;C&oacutemo calificarias la forma de conducir del operador? </h2> 
 			</div>
 			<div class="large-2 columns">
-				<button type="button" id="backTo3" class="secondary button backBtn">Back</button>
+				<button type="button" id="backTo3" class="secondary button backBtn">Anterior</button>
 			</div>
 			<div class="large-12 columns">
 				<div id="ansOpts4">		
@@ -125,7 +125,7 @@
 				<h2>&iquest;El cami&oacuten se detuvo en las paradas oficiales? </h2> 
 			</div>
 			<div class="large-2 columns">
-				<button type="button" id="backTo4" class="secondary button backBtn">Back</button>
+				<button type="button" id="backTo4" class="secondary button backBtn">Anterior</button>
 			</div>
 			<div class="large-12 columns">
 				<div id="ansOpts5">

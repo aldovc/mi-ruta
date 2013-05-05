@@ -1,4 +1,7 @@
 window.hack = {};
+clog = function(args){console.log(args);};
+cdir = function(args){console.dir(args);};
+
 (function() {
 	var h = hack;
 	h.map = null;
@@ -11,13 +14,7 @@ window.hack = {};
           mapTypeId: google.maps.MapTypeId.ROADMAP
         };
 		this.map = new google.maps.Map(document.getElementById("mapCanvas"), mapOpts);
-		// var georssLayer = new google.maps.KmlLayer('http://gmaps-samples.googlecode.com/svn/trunk/ggeoxml/cta.kml');
-		var url = location.href + 'js/rutas.kmz';
-		console.log(url);
-		// var georssLayer = new google.maps.KmlLayer({
-		//     url: url
-		//     // url: 'http://gmaps-samples.googlecode.com/svn/trunk/ggeoxml/cta.kml'
-		//   });
+		
 		var georssLayer = new google.maps.KmlLayer('https://dl.dropbox.com/s/bjs386dqnvc1qt7/rutas%20de%20transporte.kmz');
 		georssLayer.setMap(this.map);
 		this.endpoints = new markers( this.map, null, {autoinit: true} );
@@ -297,11 +294,20 @@ window.hack = {};
 				});
 			}
 			else {
-				me.searchAddress( destiny, function( result ) {
-					me.setDestiny( result );
-					me.map.panTo( result );
-				});
+				if( me.getDestiny() === -1 ) {
+					me.searchAddress( destiny, function( result ) {
+						me.setDestiny( result );
+						me.map.panTo( result );
+					});
+				}
+				else {
+					me.map.panTo( me.getDestiny().getPosition() );
+				}
 			}
+
+			$('html, body').animate({
+	            scrollTop: $("#mapCanvas").offset().top
+	        }, 200);
 		});
 
 		$('#originMapBtn').click( function() {

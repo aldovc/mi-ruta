@@ -1,5 +1,4 @@
-cdir = function(args){console.dir(args);}
-clog = function(args){console.log(args);}
+
 
 // function testApp() {
 // 	var fakeRotues = [],
