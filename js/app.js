@@ -345,18 +345,19 @@ window.hack = {};
 		window.setTimeout( function() {
 			$('.question').css('height',  $(window).height() );	
 			$('.question').css('padding-top',  $(window).height()/4 );	
+			$('#progressBar').css('top', $(window).height()/4 );
 		}, 100);
 		
 		$('#submitButton').click( function() {
 			var answers = [],
 				minutes = $('.ansTextfield').val();
 			if( minutes !== '' && !isNaN(minutes) ) {
-				answers.push(minutes);
+				answers.push('0_'+minutes);
 
 				for( var i = 1; i < 6; i++ ) {
-					var opt = $('#ansOpts'+i+' > .ansSelected').attr('id');
+					var opt = $('#ansOpts'+i+' > .ansSelected').attr('id').split('_')[1];
 					if( opt !== undefined ) {
-						answers.push(opt);
+						answers.push(opt.charAt(0)+'_'+opt.charAt(1));
 					}
 					else {
 						alert('Debe completar el cuestionario.');
