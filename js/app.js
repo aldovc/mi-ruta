@@ -113,6 +113,13 @@ window.hack = {};
 		});
 	};
 
+	h.panToEndpoint = function( index ) {
+		var endpoint = this.endpoints.get( index );
+		if( endpoint !== -1 ) {
+			this.map.panTo( endpoint.getPosition() );
+		}
+	};
+
 	/** MODELS **/
 
 	/**
@@ -321,6 +328,11 @@ window.hack = {};
 		    	google.maps.event.trigger(me.map, "resize");
 		    	me.map.panTo( newCenter );
 		    }
+		});
+
+		$('.routeDetailItem').click( function() {
+			var id = parseInt( $(this).attr('id').split('_')[1] );
+			me.panToEndpoint( id );
 		});
 	};
 
