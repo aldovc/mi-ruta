@@ -415,18 +415,19 @@ window.hack = {};
 					}
 				}
 
-				if( i === 6) {
-					$.ajax({
-						type: 'POST',
-						url: './post_survey',
-			            beforeSend: function(){
-			            	$("#thanks").foundation('reveal','open');
-			          	},
-						data: { survey: answers}
-						}).done( function( resp ) {
-							clog(resp);
-					});
-				}
+				$.ajax({
+					type: 'POST',
+					url: document.URL + 'post_survey',
+          beforeSend: function(){
+            $("#thanks").foundation('reveal','open');
+          },
+					data: { survey: answers}
+				}).done( function( resp ) {
+					clog(resp);
+          setTimeout(function() {
+              window.location.href = document.URL;
+          }, 5000);
+				});
 			}
 			else {
 				alert('Debe completar el cuestionario.');
