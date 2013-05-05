@@ -1,10 +1,19 @@
+<div class="row" id="engage">
+  <div class="large-12 columns">
+  <h4>&#191;Te gustar&#205;a contribuir a mejorar el servicio de transporte p&#250;blico?</h4>
+  </div>
+  <div class="large-12 columns">
+    <input type="button" class="big success button" value="Participa evaluando el servicio" />
+  </div>
+</div>
+
 <div id="evaluaciones">	
 	<div id="cuestionario">
 		<div id="progressBar">
 		</div>
 		<div class="row question"  id="question0">
 			<div class="large-10 columns">
-				<h2>&iquest;Cuanto esperaste por el camion?  </h2> 
+				<h2>&iquest;Cu&aacute;nto esperaste por el cami&oacute;n?  </h2> 
 			</div>
 			<div class="large-12 columns">
 				<div class="ansTextcontainer">
