@@ -6,8 +6,6 @@ window.hack = {};
 	h.map = null;
 	h.routes = [];
 	h.endpoints = null;
-	h.origin = null;
-	h.destiny = null;
 	h.init = function() {
 		var mapOpts = {
           center: new google.maps.LatLng(20.65965, -103.34963),
@@ -29,7 +27,7 @@ window.hack = {};
 		geocoder.geocode( { 'address': address }, function(results, status) {
 			if (status == google.maps.GeocoderStatus.OK) {
 				if(callback && typeof callback === 'function') {
-					callback(results);	
+					callback(results[0].geometry.location);	
 				}
 			}
 			else {
@@ -45,6 +43,13 @@ window.hack = {};
 		this.endpoints.set( 1, destiny, null);
 	};
 
+	h.getOrigin = function() {
+		if( h.endpoints.get(0) !== -1 ) {
+			return h.endpoints.get(0);
+		}
+		return -1;
+	};
+
 	h.setOrigin = function( coord ) {
 		if( h.endpoints.get(0) !== -1 ) {
 			h.endpoints.set( 0, coord, null);
@@ -54,12 +59,24 @@ window.hack = {};
 		}
 	};
 
+	h.getDestiny = function() {
+		if( h.endpoints.get(1) !== -1 ) {
+			return h.endpoints.get(1);
+		}
+		return -1;
+	};
+
 	h.setDestiny = function( coord ) {
 		if( h.endpoints.get(1) !== -1 ) {
 			h.endpoints.set( 1, coord, null);
 		}
 		else {
-			h.endpoints.add( coord );
+			if( this.getOrigin() !== -1 ) {
+				h.endpoints.add( coord );
+			}
+			else {
+				alert('Elige el origen primero');
+			}
 		}
 	};
 
@@ -78,30 +95,6 @@ window.hack = {};
 			return -1;
 		}
 	};
-
-	/** Bind view-controllers */
-	function bindContollers() {
-		$('#searchAddrBtn').click( function() {
-			var origin = $('#originInput').val(),
-				destiny = $('#destinyInput').val(),
-				regex = new RegExp('guadalajara', 'i');
-
-			if( regex.test( origin ) === false ) {
-				origin += ' Guadalajara';
-			}
-			if( regex.test( destiny ) === false ) {
-				destiny += ' Guadalajara';
-			}
-
-			h.searchAddress( origin, function( result ) {
-				origin = result[0].geometry.location;
-				h.searchAddress( destiny, function( result ) {
-					destiny = result[0].geometry.location;
-					h.setEndpoints( origin, destiny );
-				});
-			});
-		});
-	}
 
 	/** MODELS **/
 
@@ -135,7 +128,7 @@ window.hack = {};
 		};	
 
 		this.add = function( coord, listener ) {
-			this.markers.push( new google.maps.Marker( {position: coord, map: this.map} ) );
+			this.markers.push( new google.maps.Marker( {position: coord, map: this.map, draggable: true} ) );
 		};
 
 		this.set = function( index, coord, opts) {
@@ -243,35 +236,49 @@ window.hack = {};
 				destiny += ' Guadalajara';
 			}
 
-			me.searchAddress( origin, function( result ) {
-				me.setOrigin( result );
-			});
+			if( me.getOrigin() === -1 ) {
+				me.searchAddress( origin, function( result ) {
+					me.setOrigin( result );
 
-			me.searchAddress( destiny, function( result ) {
-				me.set( result );
-			});
+					me.searchAddress( destiny, function( result ) {
+						me.setDestiny( result );
+						me.map.panTo( result );
+					});
+				});
+			}
+			else {
+				me.searchAddress( destiny, function( result ) {
+					me.setDestiny( result );
+					me.map.panTo( result );
+				});
+			}
 		});
 
-		$('#searchAddrBtn').click( function() {
-			var origin = $('#originInput').val(),
-				destiny = $('#destinyInput').val(),
-				regex = new RegExp('guadalajara', 'i');
-
-			if( regex.test( origin ) === false ) {
-				origin += ' Guadalajara';
+		$('#originMapBtn').click( function() {
+			var origin = me.getOrigin();
+			if( origin === -1 ) {
+				me.setOrigin( me.map.getCenter() );
+				origin = me.getOrigin();
 			}
-			if( regex.test( destiny ) === false ) {
-				destiny += ' Guadalajara';
-			}
+			origin.setAnimation(google.maps.Animation.BOUNCE);
+			window.setTimeout( function() {
+				origin.setAnimation(null);
+			}, 2000);
+		});
 
-			h.searchAddress( origin, function( result ) {
-				origin = result[0].geometry.location;
-				h.searchAddress( destiny, function( result ) {
-					destiny = result[0].geometry.location;
-					h.setEndpoints( origin, destiny );
-				});
-			});
-		});		
+		$('#destinyMapBtn').click( function() {
+			var destiny = me.getDestiny();
+			if( destiny === -1 ) {
+				me.setDestiny( me.map.getCenter() );
+				destiny = me.getDestiny();
+			}
+			if( destiny !== -1 ) {
+				destiny.setAnimation(google.maps.Animation.BOUNCE);
+				window.setTimeout( function() {
+					destiny.setAnimation(null);
+				}, 2000);
+			}
+		});
 	};
 })();
 
