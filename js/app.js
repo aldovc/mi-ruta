@@ -12,10 +12,13 @@ window.hack = {};
         };
 		this.map = new google.maps.Map(document.getElementById("mapCanvas"), mapOpts);
 		// var georssLayer = new google.maps.KmlLayer('http://gmaps-samples.googlecode.com/svn/trunk/ggeoxml/cta.kml');
-		var georssLayer = new google.maps.KmlLayer({
-		    url: 'http://localhost/projects/mi-ruta/images/rutas.kml'
-		    // url: 'http://gmaps-samples.googlecode.com/svn/trunk/ggeoxml/cta.kml'
-		  });
+		var url = location.href + 'js/rutas.kmz';
+		console.log(url);
+		// var georssLayer = new google.maps.KmlLayer({
+		//     url: url
+		//     // url: 'http://gmaps-samples.googlecode.com/svn/trunk/ggeoxml/cta.kml'
+		//   });
+		var georssLayer = new google.maps.KmlLayer('https://dl.dropbox.com/s/bjs386dqnvc1qt7/rutas%20de%20transporte.kmz');
 		georssLayer.setMap(this.map);
 		this.endpoints = new markers( this.map, null, {autoinit: true} );
 
@@ -259,6 +262,7 @@ window.hack = {};
 				q4: $('#question4').position().top,
 				q5: $('#question5').position().top
 			};
+		me.positions = positions;
 
 		$('#getLocationBtn').click( function() {
 			me.getUserLocation( function( latLng ) {
@@ -359,7 +363,7 @@ window.hack = {};
 		});
 
 		$(window).scroll(function() {
-			progressFunction( positions );
+			progressFunction( me.positions );
 		});
 
 		$('.routeDetailItem').click( function() {
@@ -435,6 +439,24 @@ window.hack = {};
 		});
 
 		$('#progressBar').css('display', 'none');
+
+		$('#startSurveyButton').click(function() {
+			$('#evaluaciones').css('display', 'inline');
+			$('html, body').animate({
+	            scrollTop: $("#evaluaciones").offset().top
+	        }, 500);
+	        $('#progressBar').css('top', $(window).height()/4 );
+			$('#progressBar > span').css('top', $(window).height()/4 );
+			me.positions = {
+				surveyStart: $('#cuestionario').position().top,
+				q0: $('#question0').position().top,
+				q1: $('#question1').position().top,
+				q2: $('#question2').position().top,
+				q3: $('#question3').position().top,
+				q4: $('#question4').position().top,
+				q5: $('#question5').position().top
+			};
+		});
 	};
 
 	/**
@@ -625,11 +647,11 @@ window.hack = {};
 			}, {
 			    type: 'bar',
 			    name: 'En la mayoria',
-			    data: [2]
+			    data: [8]
 			}, {
 			    type: 'bar',
 			    name: 'Solo en algunas',
-			    data: [2]
+			    data: [5]
 			}]
 	    });
     }

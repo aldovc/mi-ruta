@@ -3,7 +3,7 @@
   <h4>&#191;Te gustar&#205;a contribuir a mejorar el servicio de transporte p&#250;blico?</h4>
   </div>
   <div class="large-12 columns">
-    <input type="button" class="big success button" value="Participa evaluando el servicio" />
+    <input type="button" class="big success button" id="startSurveyButton" value="Participa evaluando el servicio" />
   </div>
 </div>
 

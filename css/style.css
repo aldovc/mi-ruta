@@ -67,6 +67,9 @@
   margin-top: 20px;
 }
 
+#evaluaciones {
+	display: none;
+}
 .question {
 	vertical-align: 'middle';
 }
