@@ -368,7 +368,7 @@ window.hack = {};
 				$.ajax({
 					type: 'POST',
 					url: './post_survey',
-					params: { survey: answers}
+					data: { survey: answers}
 				}).done( function( resp ) {
 					clog(resp);
 				});
