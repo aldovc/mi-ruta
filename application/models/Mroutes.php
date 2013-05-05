@@ -10,11 +10,11 @@ class MRoutes extends CI_Model {
   {
     $result[] = array(
       'number' => 0,
-      'icon' => "placeholder",
+      'icon' => "images/start.png",
       'detail' => "A detail");
     $result[] = array(
       'number' => 1,
-      'icon' => "placeholder",
+      'icon' => "images/start.png",
       'detail' => "A second detail");
 
     return $result;
