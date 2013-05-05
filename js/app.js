@@ -415,13 +415,16 @@ window.hack = {};
 
 				$.ajax({
 					type: 'POST',
-					url: './post_survey',
+					url: document.URL + 'post_survey',
           beforeSend: function(){
             $("#thanks").foundation('reveal','open');
           },
 					data: { survey: answers}
 				}).done( function( resp ) {
 					clog(resp);
+          setTimeout(function() {
+              window.location.href = document.URL;
+          }, 5000);
 				});
 			}
 			else {
