@@ -8,31 +8,6 @@
 }
 
 /****** MAP CONTROLS ******/
-#mapControls {
-	float: left;
-}
-	#endpointsInput {
-
-	}
-		.inputContainer {
-			/*float: left;*/
-			width: 420px;
-			height: 35px;
-		}
-			.inputContainer > label {
-				font: bold 10px;
-				float: left;
-				margin-right: 5px;
-				padding-top: 5px;
-			}
-			.mapTextfield {
-				float: left;
-				width: 200px;
-			}
-			.mapButton {
-				
-			}
-
 /****** MAP ******/
 
 #mapCanvas {
