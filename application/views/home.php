@@ -1,4 +1,5 @@
 	<?php
+    $this->load->view('facebook');
     $this->load->view('mapControls');
 		$this->load->view('map');
     $this->load->view('routeHeader');
