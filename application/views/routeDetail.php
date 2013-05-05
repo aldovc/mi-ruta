@@ -1,5 +1,5 @@
 <?php 
-	for($event in $events ): 
+	foreach($events as $event): 
 ?>
 <div class="row" id="routeEvent<?php echo $event['number'] ?>">
 	<div class="icon">
@@ -9,4 +9,4 @@
 		<?php echo $event['detail']  ?>
 	</div>
 </div>
-<?php endfor;?>
+<?php endforeach;?>
