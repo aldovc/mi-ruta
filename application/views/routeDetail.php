@@ -1,8 +1,12 @@
-<div class="row">
+<?php 
+	for($event in $events ): 
+?>
+<div class="row" id="routeEvent<?php echo $event['number'] ?>">
 	<div class="icon">
-		<img src="<?php echo("") ?>">
+		<img src="<?php echo $event['icon'] ?>">
 	</div>
 	<div claas="routeDetailItem">
-		<?php echo('Route detail') ?>
+		<?php echo $event['detail']  ?>
 	</div>
 </div>
+<?php endfor;?>
