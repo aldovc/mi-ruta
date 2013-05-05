@@ -417,16 +417,16 @@ window.hack = {};
 
 				$.ajax({
 					type: 'POST',
-					url: document.URL + 'post_survey',
-          beforeSend: function(){
-            $("#thanks").foundation('reveal','open');
-          },
-					data: { survey: answers}
-				}).done( function( resp ) {
-					clog(resp);
-          setTimeout(function() {
-              window.location.href = document.URL;
-          }, 5000);
+					url: location.href + 'post_survey',
+			          beforeSend: function(){
+			            $("#thanks").foundation('reveal','open');
+			            setTimeout(function() {
+				              window.location.href = location.href;
+				          }, 3000);
+			          },
+								data: { survey: answers}
+							}).done( function( resp ) {
+								clog(resp);
 				});
 			}
 			else {
