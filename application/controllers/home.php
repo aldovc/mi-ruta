@@ -5,12 +5,12 @@ class Home extends CI_Controller {
   function __construct()
   {
     parent::__construct();
+    $this->load->library('session');
     parse_str($_SERVER['QUERY_STRING'], $_REQUEST);
     $CI = & get_instance();
     $CI->config->load("facebook",TRUE);
     $config = $CI->config->item('facebook');
     $this->load->library('facebook', $config);
-    $this->load->library('session');
   }
 
 
