@@ -14,9 +14,21 @@ class Facebook_Login extends CI_Controller {
 
 	public function index()
 	{
-
-    $vars['view']= 'facebook_login';
-		$this->load->view('template', $vars);
+    $user = $this->facebook->getUser();
+    if($user)
+    {
+      try {
+        $user_profile = $this->facebook->api('/me');
+      } catch(FacebookApiException $e) {
+        echo "Ocurri&oacute; un error con Facebook";
+        $user = null;
+      }
+    }
+    else {
+      $vars['url'] = $this->facebook->getLoginUrl(array('scope' => 'email'));
+      $vars['view']= 'facebook_login';
+		  $this->load->view('template', $vars);
+    }
 	}
 }
 
