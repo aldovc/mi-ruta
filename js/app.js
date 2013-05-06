@@ -1,4 +1,4 @@
-window.hack = {};
+window.hack = {}; // 
 clog = function(args){console.log(args);};
 cdir = function(args){console.dir(args);};
 
